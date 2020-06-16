@@ -30,19 +30,24 @@ public class CountryServiceImpl implements CountryService {
         return buildFinalMessage(startCountry, travelEntryInfoDto.getBudgetPerCountry(), rounds, remainder).toString();
     }
 
-    private StringBuilder buildFinalMessage(final Country startCountry
-            , final int budgetPerCountry
-            , final int rounds
-            , final double remainder){
-        final StringBuilder finalMessage = new StringBuilder("Starting country is " + startCountry.getName() +
-                " it has " + startCountry.getNeighbourCountries().size() +
-                " neighbor countries " +
-                startCountry.getNeighbourCountries()
+    private StringBuilder buildFinalMessage(final Country startCountry,
+                                            final int budgetPerCountry,
+                                            final int rounds,
+                                            final double remainder){
+        final StringBuilder finalMessage = new StringBuilder();
+        finalMessage.append("Starting country is ")
+                .append(startCountry.getName())
+                .append(" it has ")
+                .append(startCountry.getNeighbourCountries().size())
+                .append(" neighbor countries ")
+                .append(startCountry.getNeighbourCountries()
                         .stream()
                         .map(Country::getName)
-                        .collect(Collectors.toList()) +
-                " and User can travel through them " + rounds + " times." +
-                " He will have " + remainder + " money left.");
+                        .collect(Collectors.toList())).append(" and User can travel through them ")
+                .append(rounds).append(" times.")
+                .append(" He will have ")
+                .append(remainder)
+                .append(" money left.");
         for (Country country : startCountry.getNeighbourCountries()) {
             finalMessage.append("For ")
                     .append(country.getName())
